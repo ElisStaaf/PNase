@@ -1,0 +1,124 @@
+
+
+	INSTALL:
+
+[this text is from a60.info *Install*]
+
+
+
+Installation of the Algol 60 Interpreter
+****************************************
+
+
+A60 now runs on Un*x machines and PC's.
+
+
+
+Installation for Un*x
+=====================
+
+
+Since version v0.18 a configure script is provided.
+
+Simply run `./configure' followed by `make'.
+
+
+For your convenience the old Makefile is still avail as Makefile.unx.
+
+If configure does not work for you, follow this old instructions:
+
+Glance through the Makefile and change the FLAGS as appropriate:
+
+
+`_POSIX_SOURCE'
+     	define this when compiling for a Posix compliant System.
+             This should work and suffice for many Systems including
+             SunOS and Linux.
+
+`USG'
+     	define this when compiling for a System V Un*x. For a BSD
+     system
+     	define nothing; this is the default.
+
+`VPRINTF_MISSING'
+     	define this if your system does not provide the vprintf ()
+     	function. This is used in err.c.
+
+`REALLOC_MISSING'
+     	define this if your system does not provide the realloc ()
+     	function. This is used in util.c.
+
+`ALLOCA_MISSING'
+     	define this if your system does not provide the alloca ()
+     	function. This is only used by bison. If you are not using
+     the bison
+     	generated parser, this define is not used.
+
+`NO_LIMITS_H'
+     	define this if your system has no header limits.h, defining
+     	`LONG_MIN' and `LONG_MAX'.  (don't care: set it if
+     	you're in doubt)
+
+`NO_ENUMS'
+     	define this if your compiler bombs on enums and you have
+     	changed the enum declarations in the header files. Look to
+     	ENUM.README for more about this (normally you will not).
+
+`DEBUG'
+     	define this if you would like to include general debug code
+             (normally you will not).
+
+`PARSEDEBUG'
+     	define this if you would like to include the debug code for
+     the
+     	parser (normally you will not).
+
+`MEMORY_STATISTICS'
+     	define this if you would like to include some code for
+     	computing statistics about the amount of heap and stack
+     used
+     	(normally you will not).
+
+
+For installation adjust BINDIR to point to the destination for the "a60"
+binary, and LIBDIR to point to the destination of the "a60-mkc.inc"
+file. If you don't want this, set them to `/tmp'; they are only used, if
+C output is being compiled.  MANDIR and MANSUFF are used to install the
+"a60.man" manual page.
+
+
+
+Ah, we are back to normality:
+
+
+Say `make' to compile.
+
+If you would like to make the simple edit-and-go xa60 application, say
+`make xa60'.
+
+
+If you would like to run the test suite, say `make test', and hopefully
+no differences between the expected output and the actual output will be
+found.
+
+
+Say `make install' to install the binary, the manpage and the
+include-file.
+
+Say `make xa60-install' to install the xa60 binary and the xa60 manpage.
+
+
+
+Installation for PC's
+=====================
+
+
+I've compiled the sources with QuickC v2.0 using qc-makeit.bat. The
+project file is qc-a60.mak. The compiler itself runs short of memory
+when running the optimiser, so the a60-ptab.c module had better be
+compiled without it.
+
+C code generation is possible, but I've tried it only with few examples,
+because the large generated macros cannot be compiled properly.
+
+

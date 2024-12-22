@@ -1,0 +1,22 @@
+'begin'
+  'comment'
+
+	broken-lab.a60:   NASE A60 failes to execute a junp to a label 
+			  after 'PROCEDURE' but before a following
+			  'BEGIN'
+
+	you may move lab: label below 'BEGIN' ...
+  ;
+
+  'procedure' tt;
+ labfail:
+  'begin'
+ labok:
+    'goto' labfail;
+  'end';
+
+  tt;
+
+'END'
+
+

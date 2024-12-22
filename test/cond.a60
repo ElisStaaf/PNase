@@ -1,0 +1,29 @@
+'begin'
+
+	'if' 1 < 2 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 1 <= 2 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 1 < 1 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 1 <= 1 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 2 < 1 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 2 <= 1 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	outstring (1, "\n");
+
+	'if' 1 > 2 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 1 >= 2 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 1 > 1 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 1 >= 1 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 2 > 1 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 2 >= 1 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	outstring (1, "\n");
+
+	'if' 2 = 1 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 2 = 2 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 2 = 3 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	outstring (1, "\n");
+
+	'if' 2 != 1 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	'if' 2 != 2 'then' outinteger (1, 0) 'else' outinteger (1, 1);
+	'if' 2 != 3 'then' outinteger (1, 1) 'else' outinteger (1, 0);
+	outstring (1, "\n");
+
+'end'

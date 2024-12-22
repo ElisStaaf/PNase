@@ -1,0 +1,39 @@
+'BEGIN'
+   'COMMENT' 30-APR-1996
+             Knuth and Merner, CACM June 1961;
+   'INTEGER' J, A, M, P, Z;
+   'INTEGER' 'PROCEDURE' G(J, N, Z, V); 'INTEGER' J, N, Z, V;
+   'BEGIN'
+      'FOR' J := 1 'STEP' 1 'UNTIL' N 'DO' Z := V;
+      G := 1
+   'END';
+
+   Z := 0;
+
+   'FOR' M := 1 'STEP' 1 'UNTIL' 10 *
+      G(J, 'IF' J = 0 
+           'THEN' -1 
+           'ELSE' J, P,
+              'IF' J = 1 
+              'THEN'  1
+              'ELSE'
+                 'IF' G(A, J, Z,
+                    'IF' A = 1 
+                    'THEN' 1
+                    'ELSE'
+                       'IF' A * (J 'DIV' A) = J 'AND' A < J 
+                       'THEN' 0
+                       'ELSE' Z) = Z
+                 'THEN' 
+                   ('IF' P < M 
+                    'THEN' P + 1
+                    'ELSE' J * G(A, 1, J, -1))
+                 'ELSE' P)
+   'DO' 
+      'IF' M = 1 
+      'THEN' outinteger (1, P)
+      'ELSE' 
+         'IF' 10 *(M 'DIV' 10) = M - 1
+         'THEN' 'begin' outinteger (1, P); outstring (1, "\n") 'end'
+         'ELSE' outinteger (1, P)
+'END'

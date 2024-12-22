@@ -1,0 +1,16 @@
+BEGIN
+
+  PROCEDURE p(b, q);
+    BOOLEAN b; PROCEDURE q;
+    BEGIN 
+      PROCEDURE outputb; vprint(b);
+      IF b 
+        THEN p(NOT b, outputb) 
+        ELSE BEGIN q; outputb END
+    END p;
+
+  PROCEDURE skip; ;
+
+  p(true, skip) 
+
+END

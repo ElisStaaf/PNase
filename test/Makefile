@@ -1,0 +1,3 @@
+
+test all:
+	runtest.sh

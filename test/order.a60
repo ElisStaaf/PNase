@@ -1,0 +1,45 @@
+'begin'
+    'comment'
+        evaluation ordering:
+    ;
+
+    'integer' 'procedure' printret (val);
+	'begin'
+		outinteger (1, val);
+	 	printret := val;
+	'end';
+
+    'real' 'procedure' printrret (val);
+	'begin'
+		outreal (1, val);
+	 	printrret := val;
+	'end';
+
+    'begin' 'comment' part 1 ;
+
+        outstring (1, `eval 4 + 5 + 6:  ');
+        outinteger (1, printret (4) + printret (5) + printret (6));
+        outstring (1, `\n');
+
+        outstring (1, `eval 2 * 3 * 4:  ');
+        outinteger (1, printret (2) * printret (3) * printret (4));
+        outstring (1, `\n');
+
+        outstring (1, `eval 24 div 3 div 4:  ');
+        outinteger (1, printret (24) 'div' printret (3) 'div' printret (4));
+        outstring (1, `\n');
+
+        outstring (1, `eval 24 / 5 / 2:  ');
+        outreal (1, printrret (24) / printrret (5) / printrret (2));
+        outstring (1, `\n');
+
+	'begin'
+		'integer' a, j;
+		a := 12;
+		j := 3;
+		vprint (printret (12) * (printret (6) 'div' 
+			printret (2)) = printret (12) 
+			'and' printret(6) < printret (2)); 
+	'end'
+    'end'
+'end'

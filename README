@@ -1,0 +1,56 @@
+    PNASE:                      Dec 2024
+
+Hello there! I just want to clarify some things! I (@ElisStaaf), did
+*not* make NASE. This is a patched version of NASE, because I wanted
+to make my own Algol60 programs. When I ran the code, it didn't work.
+So, I just patched it up. You're in reality running a slightly modified
+version of NASE A60 V0.22 when you install this. You should see NASE's
+official website at <https://www.bertnase.de/a60>. I am going to keep
+the original license and copying permissions as NASE A60 V0.22.
+
+Sincerely, Elis Staaf.
+
+
+	README:						Sep 1990
+							Oct 1999
+
+
+This is the Algol 60 interpreter NASE A60 (now around version 0.21).
+Made for fun and call-by-name.
+
+The NASE A60 interpreter is free software.  See the file COPYING for
+copying permission.
+
+About compiling and installation see the file INSTALL (or simply run
+./configure followed by a make install ;-).
+
+NASE A60 is based on the ``Revised Report on the Algorithmic Language
+Algol 60'' (The file RRA60.texinfo contains a source form of the
+report, RRA60*.ps a formatted versions; it is not covererd by the
+COPYING permissions).
+
+The I/O section of the interpreter is not complete at all, but basic
+things are now working.
+
+About the interpreter:  There is now the a60.texinfo documentation,
+but not finished at all - sorry.
+
+Additionally there is the ``xa60'' frontend: a simple edit-and-go X11
+application. 
+
+In the micro directory there are additional Makefiles for compiling for
+MSDOS, etc.
+
+
+Have fun.
+
+Erik Schoenfelder (schoenfr@gaertner.de)
+
+--
+Scotty: Captain, we din' can reference it!
+Kirk:   Analysis, Mr. Spock?
+Spock:  Captain, it doesn't appear in the symbol table.
+Kirk:   Then it's of external origin?
+Spock:  Affirmative.
+Kirk:   Mr. Sulu, go to pass two.
+Sulu:   Aye aye, sir, going to pass two.

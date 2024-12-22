@@ -1,0 +1,23 @@
+
+begin
+	integer ival;
+	real rval;
+
+        insymbol (0, "abc", ival);
+	outsymbol (1, "abc", ival);
+
+        insymbol (0, "abc", ival);
+        outsymbol (1, "abc", ival);
+
+	insymbol (0, "abc", ival);
+	outsymbol (1, "abc", ival);
+
+	insymbol (0, "", ival);
+	outsymbol (1, "", ival);
+
+	for ival := 0 step 1 until 4  do
+  	begin
+	  inreal (0, rval);
+	  outreal (1, rval)
+	end
+end

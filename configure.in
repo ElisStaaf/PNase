@@ -1,0 +1,105 @@
+dnl	This file is an input file used by the GNU "autoconf" program to
+dnl	generate the file "configure", which is run during installation
+dnl	to configure the system for the local environment.
+dnl
+dnl most of this script is cloned from scotty's configure.in.
+dnl
+AC_INIT(a60.h)
+AC_CONFIG_HEADER(config.h)
+
+#----------------------------------------------------------------------------
+#       Check if we should use gcc if available on this machine.
+#----------------------------------------------------------------------------
+
+AC_ARG_WITH(gcc, [  --with-gcc              use gcc for compilation],
+	use_gcc=1)
+if test -z "$use_gcc" ; then
+    CC=${CC-cc}
+else
+    AC_PROG_CC
+    if test "$CC" = "gcc" ; then
+	CC="gcc -Wall"
+    fi
+fi
+AC_SUBST(CC)
+AC_PROG_YACC
+AC_PROG_INSTALL
+
+#--------------------------------------------------------------------
+#	Locate the X11 header files and the X11 library archive.  Try
+#	the ac_find_x macro first, but if it doesn't find the X stuff
+#	(e.g. because there's no xmkmf program) then check through
+#	a list of possible directories.
+#--------------------------------------------------------------------
+
+AC_CHECK_PROG(tk_ok, xmkmf, 1, 0)
+if test $tk_ok = 1; then
+    AC_PATH_X
+fi
+
+if test "$XINCLUDE_DIR" != ""; then
+    x_includes="$XINCLUDE_DIR"
+fi
+if test "$x_includes" = /usr/include; then
+    XINCLUDES="# no special path needed"
+elif test "$x_includes" != ""; then
+    XINCLUDES=" -I$x_includes"
+else
+    AC_CHECKING(for X11 header files)
+    XINCLUDES="# no special path needed"
+    AC_TRY_CPP([#include <X11/Intrinsic.h>], , XINCLUDES="nope")
+    if test "$XINCLUDES" = nope; then
+        dirs="/usr/unsupported/include /usr/local/include /usr/X386/include /usr/include/X11R4 /usr/X11R5/include /usr/include/X11R5 /usr/openwin/include /usr/X11/include /usr/X11R6/include"
+        for i in $dirs ; do
+	    if test -r $i/X11/Intrinsic.h; then
+	        XINCLUDES=" -I$i"
+	    fi
+        done
+    fi
+fi
+if test "$XINCLUDES" = nope; then
+  AC_WARN(Couldn't find any X11 include files -- this affects only xa60)
+  XINCLUDES="# no include files found"
+fi
+AC_SUBST(XINCLUDES)
+
+
+if test "$XLIBRARY_DIR" != ""; then
+    x_libraries="$XLIBRARY_DIR"
+fi
+if test "$x_libraries" = /usr/lib; then
+    XLIBSW=-lXaw
+elif test "$x_libraries" != ""; then
+    XLIBSW="-L$x_libraries -lXaw"
+else
+    AC_CHECKING(for X11 library archive)
+    AC_CHECK_LIB(Xaw, main, XLIBSW="-lXaw", XLIBSW=nope)
+    if test "$XLIBSW" = nope; then
+	dirs="/usr/unsupported/lib /usr/local/lib /usr/X386/lib /usr/lib/X11R4 /usr/X11R5/lib /usr/lib/X11R5 /usr/openwin/lib /usr/X11/lib /usr/X11R6/lib"
+	for i in $dirs ; do
+	    if test -r $i/libXaw.a; then
+		XLIBSW="-L$i -lXaw"
+	    fi
+	done
+    fi
+fi
+if test "$XLIBSW" = nope ; then
+    AC_CHECK_LIB(Xwindow, main, XLIBSW=-lXwindow)
+fi
+if test "$XLIBSW" = nope ; then
+    AC_WARN(Couldn't find the X11 library archive. Using -lXaw -lXt -lXext -lXmu -lX11.)
+    XLIBSW="-lXaw"
+fi
+AC_SUBST(XLIBSW)
+
+#----------------------------------------------------------------------------
+#	Check for the existence of various libraries.
+#----------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------
+#	Checks for various include files missing on some machines.
+#----------------------------------------------------------------------------
+
+AC_CHECK_HEADERS(stdlib.h unistd.h string.h)
+
+AC_OUTPUT(Makefile)

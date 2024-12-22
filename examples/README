@@ -1,0 +1,21 @@
+
+
+
+	examples/README:				Oct 1990
+	(schoenfr)					Oct 1999
+
+
+Some more examples in Algol 60.
+
+
+The script ``runexamp.sh'' executes one after another (giving a lot of
+output).
+
+
+The teul[12].a60 example is taken from `ALGOL Praktikum, Dr. Karl
+Nickel, 1964' and needed in the old times several minutes to run 
+(cannot remember the correct times) :-).
+
+
+-- 
+Erik Schoenfelder (schoenfr@gaertner.de)

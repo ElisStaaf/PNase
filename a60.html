@@ -1,0 +1,1214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<!-- Created on April, 21  2005 by texi2html 1.65 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>Algol 60: </TITLE>
+
+<META NAME="description" CONTENT="Algol 60: ">
+<META NAME="keywords" CONTENT="Algol 60: ">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.65">
+
+</HEAD>
+
+<BODY LANG="en" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC_Top"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<CENTER>
+<H1>Algol 60</H1>
+</CENTER>
+<HR>
+<P></P>  
+<H2> Overview: </H2>
+<BLOCKQUOTE>  
+<A NAME="TOC1" HREF="a60.html#SEC1">1. Introduction</A>
+<BR>
+<A NAME="TOC2" HREF="a60.html#SEC2">2. The Goal of the Interpreter</A>
+<BR>
+<A NAME="TOC3" HREF="a60.html#SEC3">3. Installation of the Algol 60 Interpreter</A>
+<BR>
+<A NAME="TOC6" HREF="a60.html#SEC6">4. Algol 60 Command Line Options</A>
+<BR>
+<A NAME="TOC7" HREF="a60.html#SEC7">5. The Implementation</A>
+<BR>
+<A NAME="TOC8" HREF="a60.html#SEC8">6. Representation of Algol 60 Code</A>
+<BR>
+<A NAME="TOC9" HREF="a60.html#SEC9">7. Builtin Functions</A>
+<BR>
+<A NAME="TOC14" HREF="a60.html#SEC14">8. C-code creation</A>
+<BR>
+<A NAME="TOC15" HREF="a60.html#SEC15">9. Some Examples</A>
+<BR>
+<A NAME="TOC16" HREF="a60.html#SEC16">10. Parser and Runtime Messages</A>
+<BR>
+<A NAME="TOC17" HREF="a60.html#SEC17">11. About Bugs and Bug Reports</A>
+<BR>
+<A NAME="TOC18" HREF="a60.html#SEC18">12. Bibliography and References</A>
+<BR>
+</BLOCKQUOTE>
+<HR SIZE=1>
+<A NAME="SEC1"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC2"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[ &lt;&lt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt;&gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 1. Introduction </H1>
+<!--docid::SEC1::-->
+<P>
+
+This manual documents how to run, install and use the Algol 60
+Interpreter.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC2">2. The Goal of the Interpreter</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">The goal of the Interpreter.</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC3">3. Installation of the Algol 60 Interpreter</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">About the installation of `<SAMP>a60</SAMP>'.</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC6">4. Algol 60 Command Line Options</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Command line options supported by `<SAMP>a60</SAMP>'.</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC7">5. The Implementation</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">About the implementation.</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC15">9. Some Examples</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Examples.</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC16">10. Parser and Runtime Messages</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC17">11. About Bugs and Bug Reports</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Known Bugs and more.</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC18">12. Bibliography and References</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Goal"></A>
+<HR SIZE="6">
+<A NAME="SEC2"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC1"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC3"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC3"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 2. The Goal of the Interpreter </H1>
+<!--docid::SEC2::-->
+<P>
+
+This Algol 60 interpreter is based upon the "Revised Report on the
+Algorithmic Language Algol 60" [RRA60].
+</P><P>
+
+At school, a long time ago, I learned Algol 60 in a completely
+theoretical manner.  Later I learned Algol 68 and C (and more ...). 
+</P><P>
+
+The concept of call-by-name never left my mind, and so I started to
+write this Algol 60 interpreter:  Made for fun and a call-by-name.
+</P><P>
+
+Here is an example:
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'begin'
+                'integer' 'procedure' one;
+                'begin'
+                        write (`one called \n');
+                        one := 1
+                'end';
+
+                'procedure' foo (n);
+                'integer' n;
+                'if' n &#62; 0 'then'
+                        foo ( n - one );
+
+                foo (5)
+        'end'
+</pre></td></tr></table></P><P>
+
+The parameter `n' in `foo (n)' is called by name.  Every time `n - one'
+is evaluated, `n' is evaluated by name.  Guess how many times `one' is
+called: 5, 10, 15 ?
+</P><P>
+
+Guess or prove ? -- I want to run the example and see the result.  And
+now you can do like me.
+</P><P>
+
+This was the main goal: call-by-name.
+</P><P>
+
+Many things were later added, and now the defining description of the
+"Revised Report on the Algorithmic Language Algol 60" is nearly
+(hopefully) fulfilled.
+</P><P>
+
+<A NAME="Install"></A>
+<HR SIZE="6">
+<A NAME="SEC3"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC2"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC4"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC2"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC6"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 3. Installation of the Algol 60 Interpreter </H1>
+<!--docid::SEC3::-->
+<P>
+
+A60 now runs on Un*x machines and PC's.
+</P><P>
+
+<HR SIZE="6">
+<A NAME="SEC4"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC3"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC5"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[ &lt;&lt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt;&gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 3.1 Installation for Un*x </H2>
+<!--docid::SEC4::-->
+<P>
+
+Since version v0.18 a configure script is provided.
+</P><P>
+
+Simply run <CODE>./configure</CODE> followed by <CODE>make</CODE>.
+</P><P>
+
+For your convenience the old Makefile is still avail as Makefile.unx.
+</P><P>
+
+If configure does not work for you, follow this old instructions:
+</P><P>
+
+Glance through the Makefile and change the FLAGS as appropriate:
+</P><P>
+
+<DL COMPACT>
+
+<DT><CODE>_POSIX_SOURCE</CODE>
+<DD>	define this when compiling for a Posix compliant System.
+        This should work and suffice for many Systems including
+        SunOS and Linux.
+<P>
+
+<DT><CODE>USG</CODE>
+<DD>	define this when compiling for a System V Un*x. For a BSD system
+	define nothing; this is the default.
+<P>
+
+<DT><CODE>VPRINTF_MISSING</CODE>
+<DD>	define this if your system does not provide the vprintf ()
+	function. This is used in err.c.
+<P>
+
+<DT><CODE>REALLOC_MISSING</CODE>
+<DD>	define this if your system does not provide the realloc ()
+	function. This is used in util.c.
+<P>
+
+<DT><CODE>ALLOCA_MISSING</CODE>
+<DD>	define this if your system does not provide the alloca ()
+	function. This is only used by bison. If you are not using the bison
+	generated parser, this define is not used.
+<P>
+
+<DT><CODE>NO_LIMITS_H</CODE>
+<DD>	define this if your system has no header limits.h, defining
+	<CODE>LONG_MIN</CODE> and <CODE>LONG_MAX</CODE>.  (don't care: set it if
+	you're in doubt)
+<P>
+
+<DT><CODE>NO_ENUMS</CODE>
+<DD>	define this if your compiler bombs on enums and you have
+	changed the enum declarations in the header files. Look to
+	ENUM.README for more about this (normally you will not).
+<P>
+
+<DT><CODE>DEBUG</CODE>
+<DD>	define this if you would like to include general debug code
+        (normally you will not).
+<P>
+
+<DT><CODE>PARSEDEBUG</CODE>
+<DD>	define this if you would like to include the debug code for the
+	parser (normally you will not).
+<P>
+
+<DT><CODE>MEMORY_STATISTICS</CODE>
+<DD>	define this if you would like to include some code for
+	computing statistics about the amount of heap and stack used
+	(normally you will not).
+<P>
+
+</DL>
+<P>
+
+For installation adjust BINDIR to point to the destination for the
+"a60" binary, and LIBDIR to point to the destination of the
+"a60-mkc.inc" file. If you don't want this, set them to `/tmp'; they
+are only used, if C output is being compiled.  MANDIR and MANSUFF are
+used to install the "a60.man" manual page.
+</P><P>
+
+Ah, we are back to normality:
+</P><P>
+
+Say <CODE>make</CODE> to compile.
+</P><P>
+
+If you would like to make the simple edit-and-go xa60 application, say
+<CODE>make xa60</CODE>.
+</P><P>
+
+If you would like to run the test suite, say <CODE>make test</CODE>, and
+hopefully no differences between the expected output and the actual
+output will be found.
+</P><P>
+
+Say <CODE>make install</CODE> to install the binary, the manpage and the
+include-file.
+</P><P>
+
+Say <CODE>make xa60-install</CODE> to install the xa60 binary and the xa60
+manpage.
+</P><P>
+
+<HR SIZE="6">
+<A NAME="SEC5"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC4"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC6"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[ &lt;&lt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt;&gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 3.2 Installation for PC's </H2>
+<!--docid::SEC5::-->
+<P>
+
+I've compiled the sources with QuickC v2.0 using qc-makeit.bat. The
+project file is qc-a60.mak. The compiler itself runs short of memory
+when running the optimiser, so the a60-ptab.c module had better be compiled
+without it.
+</P><P>
+
+C code generation is possible, but I've tried it only with few examples,
+because the large generated macros cannot be compiled properly.
+</P><P>
+
+<A NAME="Options"></A>
+<HR SIZE="6">
+<A NAME="SEC6"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC5"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC3"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 4. Algol 60 Command Line Options </H1>
+<!--docid::SEC6::-->
+<P>
+
+When you invoke Algol 60 ...
+</P><P>
+
+Without arguments, the program text is read from standard input, and
+executed upon reaching EOF.
+</P><P>
+
+The available options:
+</P><P>
+
+<DL COMPACT>
+<DT>`<SAMP>-h</SAMP>'
+<DD>Print the usage message and exit.
+<P>
+
+<DT>`<SAMP>-V</SAMP>'
+<DD>Print the Version string and exit.
+<P>
+
+<DT>`<SAMP>-v</SAMP>'
+<DD>Be verbose processing the input. The version string is displayed too.
+<P>
+
+<DT>`<SAMP>-n</SAMP>'
+<DD>Don't run the input; only parse and check.
+<P>
+
+<DT>`<SAMP>-i</SAMP>'
+<DD>Do not check or execute the input; parse only. (This was useful for
+debugging the interpreter.)
+<P>
+
+<DT>`<SAMP>-t</SAMP>'
+<DD>Trace line numbers when running the input.
+<P>
+
+<DT>`<SAMP>-strict</SAMP>'
+<DD>Follow strict a60 convention. Skip whitespace in entire input, except in
+strings. Keywords must be enclosed in single quotes.
+<P>
+
+<DT>`<SAMP>-c</SAMP>'
+<DD>Create C output from the input. This is an experimental option which changes
+a60 into something like a60-to-c.
+<P>
+
+<DT>`<SAMP>-C</SAMP>'
+<DD>Create C output from the input, like the option -c, but then invokes the C
+compiler and creates an executable (hopefully). 
+<P>
+
+<DT>`<SAMP>-o <VAR>file</VAR></SAMP>'
+<DD>Place the output in file <VAR>file</VAR>.  This is used, if C code is created
+(via the -c option) or if the input is compiled (via the -C option).
+<P>
+
+</DL>
+<P>
+
+<A NAME="Implementation"></A>
+<HR SIZE="6">
+<A NAME="SEC7"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC6"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC8"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC6"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 5. The Implementation </H1>
+<!--docid::SEC7::-->
+<P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC8">6. Representation of Algol 60 Code</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">About Keywords and recognized input</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC9">7. Builtin Functions</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP">Toplevel functions</TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="a60.html#SEC14">8. C-code creation</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Representation"></A>
+<HR SIZE="6">
+<A NAME="SEC8"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC9"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 6. Representation of Algol 60 Code </H1>
+<!--docid::SEC8::-->
+<P>
+
+There is a strict form of the input which conforms to RRA60
+and also a simple form. 
+</P><P>
+
+The strict form:
+</P><P>
+
+Keywords are expected to be enclosed in single quotes: '.
+For example: 'begin', 'for', 'if', 'end'.
+</P><P>
+
+The case of letters is insignificant in keywords. For example: 'begin' is
+the same as 'Begin', 'integer' loopvar is the same as 'INTEGER' loopvar.
+</P><P>
+
+Whitespace characters are skipped in the input, except in strings. For example:
+'integer' greatnumber is the same as 'integer' great number, and the
+same as ' i n t e g e r' great n u m b e r.
+</P><P>
+
+Strings are expected to be enclosed in double quotes, or in a backquote
+and a quote. For example: "This is a string", `This is a string'. The
+'\' is recognized as a escape character (like C syntax). "\n" is a
+linefeed, "\"" is a double-quote and "\\" is a backslash.
+</P><P>
+
+The simple form:
+</P><P>
+
+Keywords are written like identifiers. For example: begin, for, if,
+end. White spaces are recognized to separate tokens. Therefore, it is
+illegal to use: integer great number;
+</P><P>
+
+The simple form is used if no quoted keyword is scanned. RRA60
+conformance can be forced with the `-strict' option.
+</P><P>
+
+<A NAME="Builtins"></A>
+<HR SIZE="6">
+<A NAME="SEC9"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC8"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC10"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC14"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 7. Builtin Functions </H1>
+<!--docid::SEC9::-->
+<P>
+
+<HR SIZE="6">
+<A NAME="SEC10"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC9"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC11"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 7.1 Mathematical and conversion functions </H2>
+<!--docid::SEC10::-->
+<P>
+
+entier, abs, sign, sqrt, sin, cos, arctan, exp: implemented as described
+in RRA60.
+</P><P>
+
+rand, pi: random number generation and the constant "pi":
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'real' 'procedure' rand;
+                'code'
+</pre></td></tr></table></P><P>
+
+        returns a random number between 0.0 (inclusive) and 1.0
+        (exclusive). The randomness of "rand" is not very robust.
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'real' 'procedure' pi;
+                'code'
+</pre></td></tr></table></P><P>
+
+        returns the constant "pi".
+</P><P>
+
+<HR SIZE="6">
+<A NAME="SEC11"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC10"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC12"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 7.2 String related functions </H2>
+<!--docid::SEC11::-->
+<P>
+
+length, outstring, insymbol, outsymbol
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'integer' 'procedure' length (string);
+        'string' string;
+                'code';
+</pre></td></tr></table>        
+        returns the length of the string string.
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' outstring (channel, value);
+        'value' channel;
+        'integer' channel;
+        'string' value;
+                'code';
+</pre></td></tr></table></P><P>
+
+        send the string value to the channel channel. Currently, 
+	the only channel implemented is 1 (standard output).
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' write (string);
+        'string' string;
+                'code';
+</pre></td></tr></table></P><P>
+
+        Prints the string string to standard output. This is the same
+        behavior as outstring (1, string).
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' insymbol (channel, string, value);
+        'value' channel;
+        'integer' channel, value;
+        'string' string;
+                'code';
+</pre></td></tr></table></P><P>
+
+        A character is read from channel channel. 
+        If the character is found in string, the index is assigned to
+        value with a starting index of 0.
+        If the character is not found, the negative character 
+        code is assigned to value.  
+        Currently, the only channel implemented is 0 (standard input).
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' outsymbol (channel, string, source);
+        'value' channel, source;
+        'integer' channel, source;
+        'string' string;
+                'code';
+</pre></td></tr></table></P><P>
+
+        Prints the character at the source position of string string to
+        channel channel. The posistion is counted from 0.
+        If source is a negative value, -source is sent to the channel
+        and the string is ignored.
+        Currently, the only channel implemented is 1 (standard
+        output). 
+</P><P>
+
+<HR SIZE="6">
+<A NAME="SEC12"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC11"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC13"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 7.3 Output and Input of numbers </H2>
+<!--docid::SEC12::-->
+<P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' print (value, f1, f2);
+        'value' value, f1, f2;
+        'real' value;
+        'integer' f1, f2;
+                'code';
+</pre></td></tr></table></P><P>
+
+        The value value is printed with f1 and f2 used as format.
+        [ still missing: *** describe f1 and f2 *** ] 
+        The output is printed to standard output.
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' inreal (channel, value);
+        'value' channel;
+        'integer' channel;
+        'real' value;
+                'code';
+</pre></td></tr></table></P><P>
+
+        Reads a real number from channel channel and assigns it to
+        value. Currently, the only channel implemented is 0 (standard
+        input).
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' outreal (channel, value);
+        'value' channel, value;
+        'integer' channel;
+        'real' value;
+                'code';
+</pre></td></tr></table></P><P>
+
+        Prints the value value to channel channel. Currently, the only
+        channel implemented is 1 (standard output).
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' outinteger (channel, value);
+        'value' channel, value;
+        'integer' channel, value;
+                'code';
+</pre></td></tr></table></P><P>
+
+        Prints the value value to channel channel. Currently, the only
+        channel implemented is 1 (standard output).
+</P><P>
+
+<HR SIZE="6">
+<A NAME="SEC13"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC12"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC14"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H2> 7.4 Variable formatted output </H2>
+<!--docid::SEC13::-->
+<P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'procedure' vprint (...);
+                'code';
+</pre></td></tr></table></P><P>
+
+        Vprint prints the variable arguments to the standard output.
+        The output is terminated with a newline-character. Numbers are
+        printed width a fixed with (about 14 characters). <BR>
+        For example:  vprint ("Foo: ", 12, 99.9).
+</P><P>
+
+<A NAME="Make-C"></A>
+<HR SIZE="6">
+<A NAME="SEC14"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC13"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC9"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 8. C-code creation </H1>
+<!--docid::SEC14::-->
+<P>
+
+[** Still not finished **]
+</P><P>
+
+C-code creation for less complex programs is now possible.
+The resulting code is somewhat faster (example whetstones: about a factor of
+50).
+</P><P>
+
+Call-by-name procedures must be expandable into C macros. The other
+procedures are translated into C functions.
+</P><P>
+
+Problems / Restrictions:
+</P><P>
+
+<UL>
+<LI>
+Run-time checks are simplified or ignored.
+<P>
+
+<LI>
+Labels aren't handled correctly in procedures expanded into C macros.
+<P>
+
+<LI>
+Switches cannot be translated.
+<P>
+
+<LI>
+To be usable, many things will have to be added (or changed). 
+<P>
+
+</UL>
+<P>
+
+<A NAME="Examples"></A>
+<HR SIZE="6">
+<A NAME="SEC15"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC14"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC16"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC7"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC16"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 9. Some Examples </H1>
+<!--docid::SEC15::-->
+<P>
+
+Example 1:
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'begin'
+                write ("Hi!\n")
+        'end'
+</pre></td></tr></table></P><P>
+
+Assume these three lines are in a file named `hi.a60'.
+Run it with the call `a60 hi': It produces the output:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>Hi!
+</pre></td></tr></table></P><P>
+
+Example 2:
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        'begin'
+                'integer' 'procedure' fakul (n);
+                'value' n;
+                'integer' n;
+                'begin'
+                        'if' n &#60; 1 'then' 
+                                fakul := 1
+                        'else'
+                                fakul := n * fakul (n - 1)
+                'end';
+
+                'integer' result;
+
+                outstring (1, "See fakul (5): ");
+                result := fakul (5);
+                outinteger (1, result);
+                outstring (1, "\n");
+        'end'
+</pre></td></tr></table></P><P>
+
+This will produce the output:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>See fakul (5):  120
+</pre></td></tr></table></P><P>
+
+Example 3:
+</P><P>
+
+The classic call-by-name example: The "Jensen Device":
+</P><P>
+
+[ Note: Here the keywords are not quoted; this is not RRA60 compliant, but
+usable as an extension of NASE A60. ]
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>        begin
+                procedure jdev ( i, n, s, x );
+                begin
+                        s := 0;
+                        for i := 1 step 1 until n do
+                                s := s + x;
+                end;
+        
+                integer NN;
+        
+                NN := 100;
+        
+                begin
+                        integer i;
+                        real sum;
+                        integer array arr [1 : NN];
+        
+                        for i := 1 step 1 until NN do
+                                arr[i] := i;
+        
+                        jdev (i, NN, sum, arr [i]);
+        
+                        outstring (1, `See the sum: ');
+                        outreal (1, sum);
+                        outstring (1, `\n')
+        
+                end
+        end
+</pre></td></tr></table></P><P>
+
+This will produce the output:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>See the sum:  5050
+</pre></td></tr></table></P><P>
+
+The clever part is the loop-variable used in jdev which is passed
+by name and used as index in the array "arr [i]".
+</P><P>
+
+<A NAME="Error messages"></A>
+<HR SIZE="6">
+<A NAME="SEC16"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC17"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC15"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC17"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 10. Parser and Runtime Messages </H1>
+<!--docid::SEC16::-->
+<P>
+
+[ *** not yet - sorry *** ]
+</P><P>
+
+<A NAME="Bugs"></A>
+<HR SIZE="6">
+<A NAME="SEC17"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC16"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC18"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC16"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC18"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 11. About Bugs and Bug Reports </H1>
+<!--docid::SEC17::-->
+<P>
+
+Surely there are many bugs. Of interest are any core dumps:
+regardless of correct input or not and compile-time and run-time
+misbehavior, this should never happen. 
+Secondary are the elegance and efficiency of the implementation.
+</P><P>
+
+Please report bugs to Erik Schoenfelder (schoenfr@web.de).
+Hopefully I will have enough time to reply.
+</P><P>
+
+<A NAME="References"></A>
+<HR SIZE="6">
+<A NAME="SEC18"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC17"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[ &gt; ]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC17"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1> 12. Bibliography and References </H1>
+<!--docid::SEC18::-->
+<P>
+
+<DL COMPACT>
+<DT><VAR>[RRA60]</VAR>
+<DD>Revised Report on the Algorithmic Language Algol 60. <BR>
+Communications of the ACM
+<P>
+
+</DL>
+<P>
+
+<HR SIZE="6">
+<A NAME="SEC_Contents"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>Table of Contents</H1>
+<BLOCKQUOTE>
+<A NAME="TOC1" HREF="a60.html#SEC1">1. Introduction</A>
+<BR>
+<A NAME="TOC2" HREF="a60.html#SEC2">2. The Goal of the Interpreter</A>
+<BR>
+<A NAME="TOC3" HREF="a60.html#SEC3">3. Installation of the Algol 60 Interpreter</A>
+<BR>
+<BLOCKQUOTE>
+<A NAME="TOC4" HREF="a60.html#SEC4">3.1 Installation for Un*x</A>
+<BR>
+<A NAME="TOC5" HREF="a60.html#SEC5">3.2 Installation for PC's</A>
+<BR>
+</BLOCKQUOTE>
+<A NAME="TOC6" HREF="a60.html#SEC6">4. Algol 60 Command Line Options</A>
+<BR>
+<A NAME="TOC7" HREF="a60.html#SEC7">5. The Implementation</A>
+<BR>
+<A NAME="TOC8" HREF="a60.html#SEC8">6. Representation of Algol 60 Code</A>
+<BR>
+<A NAME="TOC9" HREF="a60.html#SEC9">7. Builtin Functions</A>
+<BR>
+<BLOCKQUOTE>
+<A NAME="TOC10" HREF="a60.html#SEC10">7.1 Mathematical and conversion functions</A>
+<BR>
+<A NAME="TOC11" HREF="a60.html#SEC11">7.2 String related functions</A>
+<BR>
+<A NAME="TOC12" HREF="a60.html#SEC12">7.3 Output and Input of numbers</A>
+<BR>
+<A NAME="TOC13" HREF="a60.html#SEC13">7.4 Variable formatted output</A>
+<BR>
+</BLOCKQUOTE>
+<A NAME="TOC14" HREF="a60.html#SEC14">8. C-code creation</A>
+<BR>
+<A NAME="TOC15" HREF="a60.html#SEC15">9. Some Examples</A>
+<BR>
+<A NAME="TOC16" HREF="a60.html#SEC16">10. Parser and Runtime Messages</A>
+<BR>
+<A NAME="TOC17" HREF="a60.html#SEC17">11. About Bugs and Bug Reports</A>
+<BR>
+<A NAME="TOC18" HREF="a60.html#SEC18">12. Bibliography and References</A>
+<BR>
+</BLOCKQUOTE>
+<HR SIZE=1>
+<A NAME="SEC_OVERVIEW"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>Short Table of Contents</H1>
+<BLOCKQUOTE>
+<A NAME="TOC1" HREF="a60.html#SEC1">1. Introduction</A>
+<BR>
+<A NAME="TOC2" HREF="a60.html#SEC2">2. The Goal of the Interpreter</A>
+<BR>
+<A NAME="TOC3" HREF="a60.html#SEC3">3. Installation of the Algol 60 Interpreter</A>
+<BR>
+<A NAME="TOC6" HREF="a60.html#SEC6">4. Algol 60 Command Line Options</A>
+<BR>
+<A NAME="TOC7" HREF="a60.html#SEC7">5. The Implementation</A>
+<BR>
+<A NAME="TOC8" HREF="a60.html#SEC8">6. Representation of Algol 60 Code</A>
+<BR>
+<A NAME="TOC9" HREF="a60.html#SEC9">7. Builtin Functions</A>
+<BR>
+<A NAME="TOC14" HREF="a60.html#SEC14">8. C-code creation</A>
+<BR>
+<A NAME="TOC15" HREF="a60.html#SEC15">9. Some Examples</A>
+<BR>
+<A NAME="TOC16" HREF="a60.html#SEC16">10. Parser and Runtime Messages</A>
+<BR>
+<A NAME="TOC17" HREF="a60.html#SEC17">11. About Bugs and Bug Reports</A>
+<BR>
+<A NAME="TOC18" HREF="a60.html#SEC18">12. Bibliography and References</A>
+<BR>
+
+</BLOCKQUOTE>
+<HR SIZE=1>
+<A NAME="SEC_About"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="a60.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<H1>About this document</H1>
+This document was generated 
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+<P></P>  
+The buttons in the navigation panels have the following meaning:
+<P></P>
+<table border = "1">
+<TR>
+<TH> Button </TH>
+<TH> Name </TH>
+<TH> Go to </TH>
+<TH> From 1.2.3 go to</TH>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &lt; ] </TD>
+<TD ALIGN="CENTER">
+Back
+</TD>
+<TD>
+previous section in reading order
+</TD>
+<TD>
+1.2.2
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &gt; ] </TD>
+<TD ALIGN="CENTER">
+Forward
+</TD>
+<TD>
+next section in reading order
+</TD>
+<TD>
+1.2.4
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &lt;&lt; ] </TD>
+<TD ALIGN="CENTER">
+FastBack
+</TD>
+<TD>
+previous or up-and-previous section 
+</TD>
+<TD>
+1.1
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ Up ] </TD>
+<TD ALIGN="CENTER">
+Up
+</TD>
+<TD>
+up section
+</TD>
+<TD>
+1.2
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ &gt;&gt; ] </TD>
+<TD ALIGN="CENTER">
+FastForward
+</TD>
+<TD>
+next or up-and-next section
+</TD>
+<TD>
+1.3
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [Top] </TD>
+<TD ALIGN="CENTER">
+Top
+</TD>
+<TD>
+cover (top) of document
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [Contents] </TD>
+<TD ALIGN="CENTER">
+Contents
+</TD>
+<TD>
+table of contents
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [Index] </TD>
+<TD ALIGN="CENTER">
+Index
+</TD>
+<TD>
+concept index
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+<TR>
+<TD ALIGN="CENTER">
+ [ ? ] </TD>
+<TD ALIGN="CENTER">
+About
+</TD>
+<TD>
+this page
+</TD>
+<TD>
+ &nbsp; 
+</TD>
+</TR>
+</TABLE>
+<P></P>
+where the <STRONG> Example </STRONG> assumes that the current position 
+is at <STRONG> Subsubsection One-Two-Three </STRONG> of a document of 
+the following structure:
+<UL>
+<LI> 1. Section One  </LI>
+<UL>
+<LI>1.1 Subsection One-One</LI>
+<UL>
+<LI> ... </LI>
+</UL>
+<LI>1.2 Subsection One-Two</LI>
+<UL>
+<LI>1.2.1 Subsubsection One-Two-One
+</LI><LI>1.2.2 Subsubsection One-Two-Two
+</LI><LI>1.2.3 Subsubsection One-Two-Three &nbsp; &nbsp; <STRONG>
+&lt;== Current Position </STRONG>
+</LI><LI>1.2.4 Subsubsection One-Two-Four
+</LI></UL>
+<LI>1.3 Subsection One-Three</LI>
+<UL>
+<LI> ... </LI>
+</UL>
+<LI>1.4 Subsection One-Four</LI>
+</UL>
+</UL>
+
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+by <I>Erik B. Nase</I> on <I>April, 21  2005</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+</FONT>
+
+</BODY>
+</HTML>
