@@ -113,7 +113,7 @@ LINTFLAGS = -q
 ##
 ## The target:
 ##
-PRG = a60
+PRG = pnase
 
 ##
 ## And more:
