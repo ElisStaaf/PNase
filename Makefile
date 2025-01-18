@@ -113,7 +113,7 @@ LINTFLAGS = -q
 ##
 ## The target:
 ##
-PRG = pnase
+PRG = nase
 
 ##
 ## And more:
@@ -237,7 +237,7 @@ inst-man:
 inst-lib:
 	-$(INSTALL_DATA) a60-mkc.inc $(LIBDIR)
 
-install: inst-man inst-bin inst-lib
+install:	inst-man inst-bin inst-lib
 
 xa60-install:	xa60
 	$(INSTALL_PROGRAM) xa60 $(BINDIR)

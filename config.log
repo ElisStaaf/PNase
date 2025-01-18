@@ -5,23 +5,5 @@ configure:776: checking for bison
 configure:837: checking for a BSD compatible install
 configure:900: checking for xmkmf
 configure:1401: checking for stdlib.h
-configure:1411:   conftest.c >/dev/null 2>conftest.out
-./configure: line 1410: conftest.c: command not found
-configure: failed program was:
-#line 1406 "configure"
-#include "confdefs.h"
-#include <stdlib.h>
 configure:1401: checking for unistd.h
-configure:1411:   conftest.c >/dev/null 2>conftest.out
-./configure: line 1410: conftest.c: command not found
-configure: failed program was:
-#line 1406 "configure"
-#include "confdefs.h"
-#include <unistd.h>
 configure:1401: checking for string.h
-configure:1411:   conftest.c >/dev/null 2>conftest.out
-./configure: line 1410: conftest.c: command not found
-configure: failed program was:
-#line 1406 "configure"
-#include "confdefs.h"
-#include <string.h>
